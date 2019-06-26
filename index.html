@@ -6,6 +6,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.core.min.js"></script>
     <link rel="stylesheet" href="assets/css/circles.css">
     <script type="text/paperscript" canvas="myCanvas">
+
+      // May keyboard letters to a color and sound
       var keyMap = {
         q: {
           sound: new Howl({
@@ -165,7 +167,7 @@
         }
       }
 
-      var circles = [];
+      var circles = []; // Hold array of circles
       function onKeyDown(event) {
         if (keyMap[event.key]) {
           // Generate a random point in viewable screen
@@ -175,7 +177,12 @@
 
           // Create new circle at random point
           var temp = new Path.Circle(point, 500);
+
+          // Color circle with corresponding color from keyMap
           temp.fillColor = keyMap[event.key].color;
+
+          // Play sound from keyMap
+          keyMap[event.key].sound.play();
 
           // Add circle to array
           circles.push(temp);
@@ -186,9 +193,15 @@
         // Iterate over array of circles
         for (var i = 0; i < circles.length; i++) {
           // Change hue every frame
-          circles[i].fillColor.hue += 3;
+          circles[i].fillColor.hue += 1;
           // Shrink every frame
           circles[i].scale(0.9);
+
+          // Remove circle from canvas and array if area < 1
+          if (circles[i].area < 1) {
+            circles[i].remove();  // Remove circle from canvas
+            circles.splice(i, 1); // Remove circle from array
+          }
         }
       }
     </script>
