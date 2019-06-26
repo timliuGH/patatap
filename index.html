@@ -167,8 +167,7 @@
 
       var circles = [];
       function onKeyDown(event) {
-        //if (keyMap[event.key)]) {
-
+        if (keyMap[event.key]) {
           // Generate a random point in viewable screen
           var maxPoint = new Point(view.size.width, view.size.height);
           var randomPoint = Point.random();
@@ -176,7 +175,7 @@
 
           // Create new circle at random point
           var temp = new Path.Circle(point, 500);
-          temp.fillColor = 'orange';//keyMap[event.key].color;
+          temp.fillColor = keyMap[event.key].color;
 
           // Add circle to array
           circles.push(temp);
