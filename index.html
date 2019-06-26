@@ -9,11 +9,11 @@
       var sound = new Howl({
         src: ['assets/sounds/bubbles.mp3']
       });
-      sound.play();
 
 
       var circles = [];
       function onKeyDown(event) {
+        sound.play();
         // Generate a random point in viewable screen
         var maxPoint = new Point(view.size.width, view.size.height);
         var randomPoint = Point.random();
