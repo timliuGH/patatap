@@ -6,25 +6,31 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.core.min.js"></script>
     <link rel="stylesheet" href="assets/css/circles.css">
     <script type="text/paperscript" canvas="myCanvas">
-      var sound = new Howl({
-        src: ['assets/sounds/bubbles.mp3']
-      });
-
+      var keyMap = {
+        a: {
+          color: "purple",
+          sound: new Howl({
+            src: ['assets/sounds/bubbles.mp3']
+          })
+        }
+      }
 
       var circles = [];
       function onKeyDown(event) {
-        sound.play();
-        // Generate a random point in viewable screen
-        var maxPoint = new Point(view.size.width, view.size.height);
-        var randomPoint = Point.random();
-        var point = maxPoint * randomPoint;
+        if (keyMap[event.key)]) {
 
-        // Create new circle at random point
-        var temp = new Path.Circle(point, 500);
-        temp.fillColor = "lightGreen";
+          // Generate a random point in viewable screen
+          var maxPoint = new Point(view.size.width, view.size.height);
+          var randomPoint = Point.random();
+          var point = maxPoint * randomPoint;
 
-        // Add circle to array
-        circles.push(temp);
+          // Create new circle at random point
+          var temp = new Path.Circle(point, 500);
+          temp.fillColor = keyMap[event.key].color;
+
+          // Add circle to array
+          circles.push(temp);
+        }
       }
 
       function onFrame(event) {
